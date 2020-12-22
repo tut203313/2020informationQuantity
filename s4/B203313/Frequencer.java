@@ -260,8 +260,6 @@ public class Frequencer implements FrequencerInterface{
 			A: o Hi Ho
 			*/
 
-			//frequencerObject.setTarget("H".getBytes());
-			
 			// you may use this line for DEBUG
 			//
 			// **** Please write code to check subByteStartIndex, and subByteEndIndex
@@ -279,6 +277,9 @@ public class Frequencer implements FrequencerInterface{
 			frequencerObject.setTarget("i".getBytes());
 			System.out.println("EndTest2: " + frequencerObject.subByteEndIndex(0,1));
 
+
+			frequencerObject.setTarget("H".getBytes());
+		
 			int result = frequencerObject.frequency();
 			System.out.print("Freq = "+ result+" ");
 			if(4 == result) { System.out.println("OK"); }
