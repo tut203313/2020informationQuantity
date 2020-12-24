@@ -85,6 +85,9 @@ public class Frequencer implements FrequencerInterface{
 		//
 		// ここに、int suffixArray をソートするコードを書け。
 		// 順番は suffixCompare で定義されるものとする。
+
+		// bubble sort
+		/*
 		for (int i=0; i<suffixArray.length; i++){
 			for (int j=suffixArray.length-1; j>i; j--){
 				if(suffixCompare(suffixArray[i], suffixArray[j]) == 1){
@@ -94,6 +97,37 @@ public class Frequencer implements FrequencerInterface{
 				}
 			}
 		}
+		*/
+		
+		// quick sort
+		quicksort(0, suffixArray.length-1);
+	}
+
+	// クイックソート
+	private void quicksort(int left, int right) {
+		int i, pivot;
+		int temp;
+
+		// 終了判定
+		if (left >= right) return;
+
+		// 入れ替え
+		pivot = left;
+		for (i=left+1; i <= right; i++){
+			if (suffixCompare(suffixArray[i], suffixArray[left]) == -1){
+				pivot++;
+				temp=suffixArray[pivot];
+				suffixArray[pivot]=suffixArray[i];
+				suffixArray[i]=temp;
+			}
+		}
+		temp=suffixArray[left];
+		suffixArray[left]=suffixArray[pivot];
+		suffixArray[pivot]=temp;
+
+		// 左右のソート
+		quicksort(left, pivot-1);
+		quicksort(pivot+1, right);
 	}
 
 	// Suffix Array を用いて、文字列の頻度を求めるコード
@@ -190,7 +224,7 @@ public class Frequencer implements FrequencerInterface{
 		// First Pattern
 		/*
 		for (int i=0;i<suffixArray.length;i++){
-			if(targetCompare(suffixArray[i], start, end)==0) {
+			if(targetCompare(suffixArray[i], start, end) == 0) {
 				return i;
 			}
 		}
@@ -255,7 +289,7 @@ public class Frequencer implements FrequencerInterface{
 		// First pattern
 		/*
 		for (int i=suffixArray.length-1;i >= 0;i--){
-			if(targetCompare(suffixArray[i], start, end)==0) {
+			if(targetCompare(suffixArray[i], start, end) == 0) {
 				return i+1;
 			}
 		}
