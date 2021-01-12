@@ -339,7 +339,7 @@ public class Frequencer implements FrequencerInterface{
 		try {
 			frequencerObject = new Frequencer();
 			frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
-			frequencerObject.printSuffixArray(); // you may use this line for DEBUG
+			//frequencerObject.printSuffixArray(); // you may use this line for DEBUG
 			/* Example from "Hi Ho Hi Ho"
 			0:  Hi Ho
 			1:  Ho
@@ -359,24 +359,26 @@ public class Frequencer implements FrequencerInterface{
 			// **** Please write code to check subByteStartIndex, and subByteEndIndex
 			//
 			//test1 : Start "Hi Ho Hi Ho", "Ho", -> 5
-			frequencerObject.setTarget("Ho".getBytes());
-			System.out.println("StartTest1: " + frequencerObject.subByteStartIndex(0,2));
+			//frequencerObject.setTarget("Ho".getBytes());
+			//System.out.println("StartTest1: " + frequencerObject.subByteStartIndex(0,2));
 			//test2 : Start "Hi Ho Hi Ho", "Ho ", -> 6
-			frequencerObject.setTarget("Ho ".getBytes());
-			System.out.println("StartTest2: " + frequencerObject.subByteStartIndex(0,3));
+			//frequencerObject.setTarget("Ho ".getBytes());
+			//System.out.println("StartTest2: " + frequencerObject.subByteStartIndex(0,3));
 			//test3 : End "Hi Ho Hi Ho", "Ho", -> 7
-			frequencerObject.setTarget("Ho".getBytes());
-			System.out.println("EndTest1: " + frequencerObject.subByteEndIndex(0,2));
+			//frequencerObject.setTarget("Ho".getBytes());
+			//System.out.println("EndTest1: " + frequencerObject.subByteEndIndex(0,2));
 			//test4 : End  "Hi Ho Hi Ho", "Ho", -> 9
-			frequencerObject.setTarget("i".getBytes());
-			System.out.println("EndTest2: " + frequencerObject.subByteEndIndex(0,1));
+			//frequencerObject.setTarget("i".getBytes());
+			//System.out.println("EndTest2: " + frequencerObject.subByteEndIndex(0,1));
 
 			frequencerObject.setTarget("H".getBytes());
 		
+			/*
 			int result = frequencerObject.frequency();
 			System.out.print("Freq = "+ result+" ");
 			if(4 == result) { System.out.println("OK"); }
 			else			{ System.out.println("WRONG"); }
+			*/
 		}
 		catch(Exception e) {
 			System.out.println("STOP");
