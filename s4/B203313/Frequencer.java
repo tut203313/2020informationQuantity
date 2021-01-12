@@ -3,7 +3,7 @@ import java.lang.*;
 import s4.specification.*;
 
 /*package s4.specification;
-ここは、1回、2回と変更のない外部仕様である。
+This is an external specification that does not change once or twice.
 public interface FrequencerInterface { // This interface provides the design for
 	frequency counter.
 	void setTarget(byte target[]); // set the data to search.
@@ -25,7 +25,7 @@ public class Frequencer implements FrequencerInterface{
 
 	boolean targetReady = false;
 	boolean spaceReady = false;
-	int [] suffixArray; // Suffix Array の実装に使うデータの型を int []とせよ。
+	int [] suffixArray; // Let the data type used to implement the Suffix Array be int [].
 
 	// The variable, "suffixArray" is the sorted array of all suffixes of mySpace.
 	// Each suffix is expressed by a integer, which is the starting position in mySpace.
@@ -44,8 +44,8 @@ public class Frequencer implements FrequencerInterface{
 	}
 
 	private int suffixCompare(int i, int j) {
-		// suffixCompare はソートのための比較メソッドである。
-		// 次のように定義せよ。
+		// suffixCompare is a comparison method for sorting.
+		// Define it as follows.
 		// comparing two suffixes by dictionary order.
 		// suffix_i is a string starting with the position i in "byte [] mySpace".
 		// Each i and j denote suffix_i, and suffix_j.
@@ -60,8 +60,7 @@ public class Frequencer implements FrequencerInterface{
 		// if suffix_i < suffix_j, it returns -1
 		// if suffix_i = suffix_j, it returns 0;
 
-		// ここにコードを記述せよ
-		//
+		// Write code here
 		if (mySpace[i] > mySpace[j]) return 1;
 		else if (mySpace[i] < mySpace[j]) return -1;
 		else if (i+1 == mySpace.length && j+1 == mySpace.length) return 0;
@@ -69,11 +68,11 @@ public class Frequencer implements FrequencerInterface{
 		else if (j+1 == mySpace.length) return 1;
 		else return suffixCompare(i+1, j+1);
 
-		//return 0; // この行は変更しなければいけない。
+		//return 0; // This line has to be changed.
 	}
 
 	public void setSpace(byte []space) {
-		// suffixArray の前処理は、setSpace で定義せよ。
+		// Define the preprocessing of suffixArray with setSpace.
 		mySpace = space; if(mySpace.length>0) spaceReady = true;
 		// First, create unsorted suffix array.
 		suffixArray = new int[space.length];
@@ -83,8 +82,8 @@ public class Frequencer implements FrequencerInterface{
 			suffixArray[i] = i; // Please note that each suffix is expressed by one	integer.
 		}
 		//
-		// ここに、int suffixArray をソートするコードを書け。
-		// 順番は suffixCompare で定義されるものとする。
+		// Write the code here to sort the int suffixArray.
+		// The order shall be defined by suffixCompare.
 
 		// bubble sort
 		/*
@@ -103,15 +102,15 @@ public class Frequencer implements FrequencerInterface{
 		quicksort(0, suffixArray.length-1);
 	}
 
-	// クイックソート
+	// quick sort
 	private void quicksort(int left, int right) {
 		int i, pivot;
 		int temp;
 
-		// 終了判定
+		// end judge
 		if (left >= right) return;
 
-		// 入れ替え
+		// swap
 		pivot = left;
 		for (i=left+1; i <= right; i++){
 			if (suffixCompare(suffixArray[i], suffixArray[left]) == -1){
@@ -125,13 +124,13 @@ public class Frequencer implements FrequencerInterface{
 		suffixArray[left]=suffixArray[pivot];
 		suffixArray[pivot]=temp;
 
-		// 左右のソート
+		// Left and right sort
 		quicksort(left, pivot-1);
 		quicksort(pivot+1, right);
 	}
 
-	// Suffix Array を用いて、文字列の頻度を求めるコード
-	// ここから、指定する範囲のコードは変更してはならない。
+	// Code to find the frequency of strings using Suffix Array
+	// From here, the code in the specified range must not be changed.
 	public void setTarget(byte [] target) {
 		myTarget = target; if(myTarget.length>0) targetReady = true;
 	}
@@ -159,11 +158,11 @@ public class Frequencer implements FrequencerInterface{
 		return last1 - first;
 	}
 
-	// 変更してはいけないコードはここまで。
+	// This is the code that should not be changed.
 
 	private int targetCompare(int i, int j, int k) {
-		// suffixArray を探索するときに使う比較関数。
-		// 次のように定義せよ
+		// A comparison function used when searching for a suffixArray.
+		// Define it as follows
 		// suffix_i is a string in mySpace starting at i-th position.
 		// target_i_k is a string in myTarget start at j-th postion ending k-th position.
 		// comparing suffix_i and target_j_k.
@@ -184,20 +183,20 @@ public class Frequencer implements FrequencerInterface{
 		// "Ho" = "Ho"
 		// "Ho" < "Ho " : "Ho " is not in the head of suffix "Ho"
 		// "Ho" = "H" : "H" is in the head of suffix "Ho"
-		//
-		// ここに比較のコードを書け
-		//
+
+		// Write the comparison code here
 		if (mySpace[i] > myTarget[j]) return 1;
 		else if (mySpace[i] < myTarget[j]) return -1;
 		else if (j+1 == k) return 0;
 		else if (i+1 == mySpace.length) return -1;
 		else return targetCompare(i+1, j+1, k);
-		//return 0; // この行は変更しなければならない。
+		//return 0; // This line must be changed.
 	}
 
 	private int subByteStartIndex(int start, int end) {
-		//suffix array のなかで、目的の文字列の出現が始まる位置を求めるメソッド
-		// 以下のように定義せよ。
+		// A method to find the position where the target 
+		// character string starts to appear in the suffix array
+		// Define it as follows
 		/* Example of suffix created from "Hi Ho Hi Ho"
 		0: Hi Ho
 		1: Ho
@@ -217,10 +216,9 @@ public class Frequencer implements FrequencerInterface{
 		// if target_start_end is "Ho", it will return 5.
 		// Assuming the suffix array is created from "Hi Ho Hi Ho",
 		// if target_start_end is "Ho ", it will return 6.
-		//
-		// ここにコードを記述せよ。
-		//
-		
+
+		// Write code here
+
 		// First Pattern
 		/*
 		for (int i=0;i<suffixArray.length;i++){
@@ -256,12 +254,13 @@ public class Frequencer implements FrequencerInterface{
         }
 		return -1;
 		
-		//return suffixArray.length; //このコードは変更しなければならない。
+		//return suffixArray.length; //This code has to be changed.
 	}
 
 	private int subByteEndIndex(int start, int end) {
-		//suffix array のなかで、目的の文字列の出現しなくなる場所を求めるメソッド
-		// 以下のように定義せよ。
+		// A method to find the place where the target string does 
+		// not appear in the suffix array
+		// Define it as follows.
 		/* Example of suffix created from "Hi Ho Hi Ho"
 		0: Hi Ho
 		1: Ho
@@ -282,9 +281,8 @@ public class Frequencer implements FrequencerInterface{
 
 		// Assuming the suffix array is created from "Hi Ho Hi Ho",
 		// if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".
-		//
-		// ここにコードを記述せよ
-		//
+		
+		// Write code here
 
 		// First pattern
 		/*
@@ -321,18 +319,21 @@ public class Frequencer implements FrequencerInterface{
         }
 		return -1;
 		
-		//return suffixArray.length; // この行は変更しなければならない、
+		//return suffixArray.length; // This line has to be changed,
 	}
-	// Suffix Array を使ったプログラムのホワイトテストは、
-	// private なメソッドとフィールドをアクセスすることが必要なので、
-	// クラスに属する static main に書く方法もある。
-	// static main があっても、呼びださなければよい。
-	// 以下は、自由に変更して実験すること。
-	// 注意:標準出力、エラー出力にメッセージを出すことは、
-	// static main からの実行のときだけに許される。
-	// 外部から Frequencer を使うときにメッセージを出力してはならない。
-	// 教員のテスト実行のときにメッセージがでると、仕様にない動作をするとみなし、
-	// 減点の対象である。
+
+	// Whitetesting a program using a Suffix Array requires access
+	//  to private methods and fields, so there is also a way to 
+	//  write it in the static main that belongs to the class.
+	// Even if there is static main, you don't have to call it. 
+	// The following can be freely changed and experimented.
+	// Note: Sending a message to standard output and error output
+	//  is only allowed when running from static main. Do not output
+	//  a message when using Frequencer from the outside.
+	// If a message appears during the teacher's test execution, 
+	//  it is considered that the operation does not meet the
+	//  specifications and is subject to deduction.
+
 	public static void main(String[] args) {
 		Frequencer frequencerObject;
 		try {
